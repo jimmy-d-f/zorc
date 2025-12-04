@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="JavaZork">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/JavaZork.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,25 +1,8 @@
-public class Command {
-    private String commandWord;
-    private String secondWord;
+import java.lang.annotation.*;
 
-    public Command(String firstWord, String secondWord) {
-        this.commandWord = firstWord;
-        this.secondWord = secondWord;
-    }
-
-    public String getCommandWord() {
-        return commandWord;
-    }
-
-    public String getSecondWord() {
-        return secondWord;
-    }
-
-    public boolean isUnknown() {
-        return commandWord == null;
-    }
-
-    public boolean hasSecondWord() {
-        return secondWord != null;
-    }
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface Command {
+    String name();
+    String description();
 }
