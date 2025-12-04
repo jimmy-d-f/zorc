@@ -1,14 +1,21 @@
-public class Character {
-    private String name;
-    private Room currentRoom;
+import java.io.Serializable;
 
-    public Character(String name, Room startingRoom) {
-        this.name = name;
+public class Character implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    private CharacterInventory inventory;
+    private Room currentRoom;
+    private GUI_Stats stats;
+
+    public Character(Room startingRoom) {
         this.currentRoom = startingRoom;
+        this.inventory = new CharacterInventory();
+        this.stats = new GUI_Stats();
     }
 
-    public String getName() {
-        return name;
+    public CharacterInventory getInventory() {
+        return inventory;
     }
 
     public Room getCurrentRoom() {
@@ -19,13 +26,14 @@ public class Character {
         this.currentRoom = room;
     }
 
-    public void move(String direction) {
-        Room nextRoom = currentRoom.getExit(direction);
-        if (nextRoom != null) {
-            currentRoom = nextRoom;
-            System.out.println("You moved to: " + currentRoom.getDescription());
-        } else {
-            System.out.println("You can't go that way!");
+    public GUI_Stats getStats() {
+        if (stats == null) {
+            stats = new GUI_Stats();
         }
+        return stats;
+    }
+
+    public void setStats(GUI_Stats stats) {
+        this.stats = stats;
     }
 }

@@ -1,36 +1,31 @@
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Room {
-    private String description;
-    private Map<String, Room> exits; // Map direction to neighboring Room
+public class Room<I extends RoomInventory> implements Serializable {
+    private static final long serialVersionUID = 1L;
 
-    public Room(String description) {
-        this.description = description;
-        exits = new HashMap<>();
+    private String name;
+    private String imagePath;
+    private I inventory;
+    private Map<Direction, Room<I>> exits = new HashMap<>();
+
+    public Room(String name, I inventory, String imagePath) {
+        this.name = name;
+        this.inventory = inventory;
+        this.imagePath = imagePath;
     }
 
-    public String getDescription() {
-        return description;
-    }
+    public String getName() { return name; }
+    public I getInventory() { return inventory; }
+    public String getImagePath() { return imagePath; }
 
-    public void setExit(String direction, Room neighbor) {
+    public void setExit(Direction direction, Room<I> neighbor) {
         exits.put(direction, neighbor);
     }
 
-    public Room getExit(String direction) {
+    public Room<I> getExit(Direction direction) {
         return exits.get(direction);
     }
-
-    public String getExitString() {
-        StringBuilder sb = new StringBuilder();
-        for (String direction : exits.keySet()) {
-            sb.append(direction).append(" ");
-        }
-        return sb.toString().trim();
-    }
-
-    public String getLongDescription() {
-        return "You are " + description + ".\nExits: " + getExitString();
-    }
 }
+
